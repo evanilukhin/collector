@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :collector, CollectorWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 4001],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -34,10 +34,10 @@ config :collector, CollectorWeb.Endpoint,
 config :collector, CollectorWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg|sass|scss)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/collector_web/views/.*(ex)$},
-      ~r{lib/collector_web/templates/.*(eex)$}
+      ~r{lib/collector_web/templates/.*(eex|slim|slime)$}
     ]
   ]
 
@@ -47,3 +47,17 @@ config :logger, :console, format: "[$level] $message\n"
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+config :phoenix, :template_engines,
+    slim: PhoenixSlime.Engine,
+    slime: PhoenixSlime.Engine
+config :kafka_ex,
+  brokers: [{"172.21.0.3", 9092}],
+  consumer_group: "kafka_ex",
+  disable_default_worker: false,
+  sync_timeout: 3000,
+  max_restarts: 10,
+  max_seconds: 60,
+  commit_interval: 5_000,
+  commit_threshold: 100,
+  use_ssl: false,
+  kafka_version: "1.0.0"

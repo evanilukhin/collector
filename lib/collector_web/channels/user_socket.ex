@@ -2,8 +2,7 @@ defmodule CollectorWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", CollectorWeb.RoomChannel
-
+  channel "herd_of_gophers:*", CollectorWeb.HerdOfGophersChannel
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
